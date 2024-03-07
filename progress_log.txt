@@ -9,4 +9,9 @@ Progress log: DefenseBrigadeTD
 - Created a basis for drawing graphics. Draws squares with their representitive colors in their coordinates.
 - Created a function that writes generated worldGrid objects into a .json file using upickle.
 - Created a function that reads worldGrid objects from .json file using upickle.
+<<<<<<< Updated upstream
 2nd meeting
+=======
+2nd meeting
+
+>>>>>>> Stashed changes

@@ -12,14 +12,21 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="sbt: scala-sdk-3.3.1" level="project" />
-    <orderEntry type="library" name="sbt: org.openjfx:javafx-base:20:jar" level="project" />
-    <orderEntry type="library" name="sbt: org.openjfx:javafx-base:20:mac-aarch64:jar" level="project" />
-    <orderEntry type="library" name="sbt: org.openjfx:javafx-controls:20:jar" level="project" />
-    <orderEntry type="library" name="sbt: org.openjfx:javafx-controls:20:mac-aarch64:jar" level="project" />
-    <orderEntry type="library" name="sbt: org.openjfx:javafx-fxml:20:jar" level="project" />
-    <orderEntry type="library" name="sbt: org.openjfx:javafx-fxml:20:mac-aarch64:jar" level="project" />
-    <orderEntry type="library" name="sbt: org.openjfx:javafx-graphics:20:jar" level="project" />
-    <orderEntry type="library" name="sbt: org.openjfx:javafx-graphics:20:mac-aarch64:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.lihaoyi:geny_3:1.0.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.lihaoyi:os-lib_3:0.9.3:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.lihaoyi:ujson_3:3.1.4:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.lihaoyi:upack_3:3.1.4:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.lihaoyi:upickle-core_3:3.1.4:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.lihaoyi:upickle-implicits_3:3.1.4:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.lihaoyi:upickle_3:3.1.4:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.openjfx:javafx-base:21.0.2:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.openjfx:javafx-base:21.0.2:mac-aarch64:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.openjfx:javafx-controls:21.0.2:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.openjfx:javafx-controls:21.0.2:mac-aarch64:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.openjfx:javafx-fxml:21.0.2:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.openjfx:javafx-fxml:21.0.2:mac-aarch64:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.openjfx:javafx-graphics:21.0.2:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.openjfx:javafx-graphics:21.0.2:mac-aarch64:jar" level="project" />
     <orderEntry type="library" name="sbt: org.openjfx:javafx-media:20:jar" level="project" />
     <orderEntry type="library" name="sbt: org.openjfx:javafx-media:20:mac-aarch64:jar" level="project" />
     <orderEntry type="library" name="sbt: org.openjfx:javafx-swing:20:jar" level="project" />
