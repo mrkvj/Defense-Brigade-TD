@@ -3,15 +3,19 @@ Progress log: DefenseBrigadeTD
 - Git repository created
 - ScalaFX tested
 1st meeting
+  Next goal: Decide on game world impelemtation and create basis for that implementation.
+
 - Decided to create grid based game world, which consists of squares.
 - Created a class Square to represent squares with x and y coordinates (location in the game world), dimensions (square size),
   ground type (high or low) and color (represents the square graphically). (error with Color-type)
 - Created a basis for drawing graphics. Draws squares with their representitive colors in their coordinates.
 - Created a function that writes generated worldGrid objects into a .json file using upickle.
 - Created a function that reads worldGrid objects from .json file using upickle.
-<<<<<<< Updated upstream
-2nd meeting
-=======
-2nd meeting
 
->>>>>>> Stashed changes
+2nd meeting:
+  Previous goal reached.
+  Next goal: create enemies that can move in the game world.
+
+- Basic path generation algorim created. Enemies can use this path to traverse the gameworld.
+- File structure improved.
+- Enemy class created and Knight enemytype added.
