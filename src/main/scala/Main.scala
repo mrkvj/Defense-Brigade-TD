@@ -27,6 +27,7 @@ object Main extends JFXApp3:
 
     // Creates and save new worldGrid into a JSON file.
     val worldGrid = worldGenerator()
+
     /*
     if createGrid == true then
       val worldGrid = worldGenerator()
@@ -34,19 +35,19 @@ object Main extends JFXApp3:
     else
       val worldGrid = JSONToGrid()
       drawWorldGrid(worldGrid)
-     */
     //root.children += drawWorldGrid(worldGrid)
+    */
 
     //val root = Pane()
     //val scene = Scene(parent = root)
     for j <- 0 to squareHeight do
       for i <- 0 to squareWidth do
         val square = new Rectangle:
-          x = worldGrid(i)(j).x * squareDim      // .getX PRODUCES AN EXCEPTION FOR SOME REASON
+          x = worldGrid(i)(j).x * squareDim
           y = worldGrid(i)(j).y * squareDim
           width = squareDim
           height = squareDim
-          fill = LightGreen   //worldGrid(i)(j).getColor
+          fill = worldGrid(i)(j).color
         root.children += square
       end for
     end for
