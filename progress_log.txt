@@ -14,10 +14,16 @@ Progress log: DefenseBrigadeTD
 
 7.3. 2nd meeting:
   Previous goal reached.
-  Next goal: create enemies that can move in the game world.
+  Next goal: Create enemies that can move in the game world.
 
 - Basic path generation algorithm created. Enemies can use this path to traverse the gameworld.
 - File structure improved.
 - Enemy class created and Knight enemy type added.
 - Changed aproach to graphics and movements.
 - Remade base for graphics and movement.
+- Map drawn correctly, multiple moving Knight type enemies can be added to the game (no steering yet).
+
+21.3 3rd meeting:
+  Previous goal reached.
+  Next goal: All basic functionality in the game, game is playable.
+  Bonus goal: Aiming for advanced project and early completion.
