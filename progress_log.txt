@@ -12,10 +12,12 @@ Progress log: DefenseBrigadeTD
 - Created a function that writes generated worldGrid objects into a .json file using upickle.
 - Created a function that reads worldGrid objects from .json file using upickle.
 
-2nd meeting:
+7.3. 2nd meeting:
   Previous goal reached.
   Next goal: create enemies that can move in the game world.
 
-- Basic path generation algorim created. Enemies can use this path to traverse the gameworld.
+- Basic path generation algorithm created. Enemies can use this path to traverse the gameworld.
 - File structure improved.
-- Enemy class created and Knight enemytype added.
+- Enemy class created and Knight enemy type added.
+- Changed aproach to graphics and movements.
+- Remade base for graphics and movement.
