@@ -17,5 +17,9 @@ val pathWidth = 8
 val worldEditor     = false
 val createGrid      = true
 
+// Enemy settings
+val sizeOfKnight    = 5
+
+
 // Random generation
 //val randColor = Random(100).between(200,250)

@@ -61,3 +61,9 @@ def drawWorldGrid(worldGrid: Array[Array[Square]]): Scene =
   end for
   scene
 end drawWorldGrid
+
+/*
+def drawEnemy(worldGrid: Array[Array[Square]]): Scene =
+
+end drawEnemy
+*/
