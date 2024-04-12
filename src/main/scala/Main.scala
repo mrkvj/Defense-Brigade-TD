@@ -20,6 +20,7 @@ object Main extends JFXApp3:
   var game = Game
   def start() =
 
+
     stage = new JFXApp3.PrimaryStage:
       title = "Defense Brigade TD"
 
@@ -44,7 +45,7 @@ object Main extends JFXApp3:
         end for
       end for
 
-      g.fill = Color.Red
+      //g.fill = Color.Green
       Game.draw(g)
 
     end paint
@@ -86,8 +87,6 @@ object Main extends JFXApp3:
     */
     val scene = new Scene(parent = root)
     stage.scene = scene
-    //val scene = Scene(parent = root)
-    //stage.scene = scene
 
     // Creates and save new worldGrid into a JSON file.
 
@@ -100,13 +99,6 @@ object Main extends JFXApp3:
       drawWorldGrid(worldGrid)
     //root.children += drawWorldGrid(worldGrid)
     */
-
-    //val root = Pane()
-    //val scene = Scene(parent = root)
-
-    //root.children += background
-    //root.children += rectangle
-
 
   end start
 end Main

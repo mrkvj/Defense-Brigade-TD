@@ -11,6 +11,7 @@ val squareHeight    = worldHeight/squareDim
 
 // Path settings (normalization on scaling could be added)
 val pathWidth = 8
+val goalSide = 80
 
 
 // General settings

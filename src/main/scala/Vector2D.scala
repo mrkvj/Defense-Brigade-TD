@@ -13,6 +13,20 @@ case class Vector2D(x: Double, y: Double):
 
   def +(other: Vector2D) = Vector2D(x + other.x, y + other.y)
 
+
+    //// Goal/Enemy position diffential.
+    //val xDiff =  posG._1 - posE._1
+    //val yDiff = posG._2 - posE._2
+    //// Differential vector length.
+    //val diffLen = math.sqrt(math.pow(xDiff,2)+math.pow(yDiff,2))
+    //// Desired velocity vector. Normalized and speed adjusted.
+    //val xDes = maxSpeed * xDiff/(1+diffLen)
+    //val yDes = maxSpeed * yDiff/(1+diffLen)
+    //val desiredVelocity = (xDes, yDes)
+    //// Return new velocity vector.
+    //Vector2D(desiredVelocity._1-velo._1, desiredVelocity._2-velo._2)
+
+
   def bound(xBound: Int, shapeWidth: Int, yBound: Int, shapeHeight: Int) =
     val newX =
       if x >= xBound + shapeWidth then x - xBound - 2 * shapeWidth
