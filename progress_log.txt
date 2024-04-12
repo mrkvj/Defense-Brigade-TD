@@ -2,6 +2,7 @@ Progress log: DefenseBrigadeTD
 
 - Git repository created
 - ScalaFX tested
+
 1st meeting
   Next goal: Decide on game world impelemtation and create basis for that implementation.
 
@@ -27,3 +28,10 @@ Progress log: DefenseBrigadeTD
   Previous goal reached.
   Next goal: All basic functionality in the game, game is playable.
   Bonus goal: Aiming for advanced project and early completion.
+
+- Player implemented.
+- Goals for steering added.
+- Basic steering implemented.
+- Losing condition and enemy final goal implemented.
+- Basic tower implemented.
+
