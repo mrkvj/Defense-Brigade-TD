@@ -1,4 +1,5 @@
-package scala
+//package scala
+package game
 
 import scalafx.scene.Scene
 import scalafx.scene.layout.Pane

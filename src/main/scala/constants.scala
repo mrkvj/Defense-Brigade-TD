@@ -1,4 +1,5 @@
-package scala
+//package scala
+package game
 
 import scala.util.*
 
@@ -19,6 +20,7 @@ val worldEditor     = false
 val createGrid      = true
 
 // Enemy settings
+val listOfEnemies: Vector[(String, Int)] = Vector(("Peasant", 1), ("Knight", 3), ("Wolf", 5), ("Lizard", 10))
 val sizeOfKnight    = 5
 
 

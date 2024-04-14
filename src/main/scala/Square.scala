@@ -1,4 +1,5 @@
-package scala
+//package scala
+package game
 
 // import scalafx.scene.paint.*
 import scalafx.scene.paint.Color.*
