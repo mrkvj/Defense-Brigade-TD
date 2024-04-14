@@ -35,3 +35,22 @@ Progress log: DefenseBrigadeTD
 - Losing condition and enemy final goal implemented.
 - Basic tower implemented.
 
+21.4. 4th meeting:
+  Trying to catch up with the project and try possibly early return.
+
+- Tower shooting functionality added with a timer.
+- Projectile class added and various subclasses for different types of projectiles (regular, piercing, homing)
+- Predictive aiming and projectile movement added.
+- Enemy hitboxes and damaging added.
+- Main obeject improved and conditions for game over and restart.
+- Media player added for self composed backround music.
+- Game object improved and various methods, logic and rigor added.
+- Wave generator improved.
+- CSV file read/write implemented with sorting for high scores.
+- Game infromation and scoreboard displays added.
+- Game over screen added.
+
+
+
+
+
