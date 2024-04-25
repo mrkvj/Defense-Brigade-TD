@@ -2,8 +2,10 @@
 package game
 
 import scala.collection.mutable.Buffer
-import scala.util.Random
 
+// Various funcitons object generation.
+
+// Degerates steering goals.
 def generateGoals(): Buffer[Goal] =
   val goals = Buffer[Goal]()
     goals += Goal(Vector2D(180, 450))
@@ -15,6 +17,26 @@ def generateGoals(): Buffer[Goal] =
   goals += Goal(Vector2D(990, 1100))
   goals
 
+
+// Generates projectiles for debugging.
+//def generateProjectiles(): Buffer[Projectile] =
+//  var projectiles = Buffer[Projectile]()
+//  projectiles += Arrow(Vector2D(400,500), Vector2D(0,0))
+//  projectiles += Arrow(Vector2D(500,500), Vector2D(0,1000))
+//  projectiles += Arrow(Vector2D(600,500), Vector2D(1000,0))
+//  projectiles
+
+// Generate towers (for debugging).
+def generateTowers(): Buffer[Tower] =
+  var towers = Buffer[Tower]()
+  towers += Bow(600, 500)
+  towers += AutoCrossbow(560, 340)
+  towers += Bow(300, 400)
+  towers += Marksman(700, 460)
+  towers.foreach(_.isMoving = false)
+  towers
+
+// Generates predetermined wave (for debugging).
 def generateStaticWave(goals: Buffer[Goal]): Buffer[Knight] =
   var enemies = Buffer[Knight]()
   enemies += Knight( Vector2D(100, 100), goals)
@@ -85,18 +107,3 @@ def generateWave(goals: Buffer[Goal], waveDifficulty: Int, waveNumber: Int): Buf
 //      enemies += enemy
 //  enemies
 
-def generateTowers(): Buffer[Tower] =
-  var towers = Buffer[Tower]()
-  towers += Bow(600, 500)
-  towers += AutoCrossbow(560, 340)
-  towers += Bow(300, 400)
-  towers += Marksman(700, 460)
-  towers.foreach(_.isPlaced = true)
-  towers
-
-//def generateProjectiles(): Buffer[Projectile] =
-//  var projectiles = Buffer[Projectile]()
-//  projectiles += Arrow(Vector2D(400,500), Vector2D(0,0))
-//  projectiles += Arrow(Vector2D(500,500), Vector2D(0,1000))
-//  projectiles += Arrow(Vector2D(600,500), Vector2D(1000,0))
-//  projectiles

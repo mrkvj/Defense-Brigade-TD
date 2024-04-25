@@ -17,11 +17,13 @@ abstract class Projectile(tower: Tower, var target: Enemy):
 
   var speed = predictiveAiming()
 
-  // Predict enemy location and return speed vector accordingly.
+  // Predict enemy location and return speed vector accordingly. (this will be overwritten by projectile types)
   def predictiveAiming(): Vector2D
 
+  // Move projectiles (this will be overwritten by projectile types).
   def move(): Unit
 
+  // Draw projectile
   def drawProjectile(g: GraphicsContext) =
     val oldTransform = g.getTransform
     g.translate(coords.x, coords.y)
@@ -30,7 +32,7 @@ abstract class Projectile(tower: Tower, var target: Enemy):
 
 class Arrow(tower: Tower, var arrowTarget: Enemy)
   extends Projectile(tower, arrowTarget ):
-  dmg = 2
+  dmg = 3
   override val maxSpeed: Double = 10
   speed = predictiveAiming()
   override val size = 5
@@ -59,7 +61,7 @@ class Piercing(tower: Tower, var piercingTarget: Enemy)
   extends Projectile(tower, piercingTarget):
 
   override val maxSpeed: Double = 20
-  dmg = 2
+  dmg = 5
   speed = predictiveAiming()
   override val size = 3
   var hitCounter = 3

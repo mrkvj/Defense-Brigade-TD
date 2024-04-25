@@ -1,5 +1,6 @@
 package scala
 
+// Player class.
 class Player {
   var hp: Int = 5
   var gold: Int = 0
@@ -8,7 +9,7 @@ class Player {
 
   def reset() =
     hp = 5
-    gold = 0
+    gold = 30
     score = 0
     lost = true
 }

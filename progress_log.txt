@@ -50,6 +50,11 @@ Progress log: DefenseBrigadeTD
 - Game infromation and scoreboard displays added.
 - Game over screen added.
 
+- Chosing tower added.
+- Moving towers added.
+- User interface added for the game.
+- Main menu added.
+- Tower purchase feature added.
 
 
 

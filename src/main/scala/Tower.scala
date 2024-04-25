@@ -12,6 +12,7 @@ import java.util.{Timer, TimerTask}
 //import scalafx.scene.input.mouseEvent
 import scalafx.Includes.jfxSceneProperty2sfx
 
+// Tower class with tower types as subclasses.
 class Tower(x: Double, y: Double):
   var resetTimer = false
   var coords = Vector2D(x,y)
@@ -22,12 +23,12 @@ class Tower(x: Double, y: Double):
   var rangeColor = Color.web("#FF000020")
   val color = Color.web("#000000")
   var fireTimer: Option[Timer] = None
-  var isPlaced = false
+  var isMoving = false
   var experience = 0
   //var enemiesInRange = Buffer[Enemy]()
 
   def placeTower() =
-    isPlaced = true
+    isMoving = false
 
   def isInRange(coords2: Vector2D): Boolean =
     coords.distanceFrom(coords2) <= range
@@ -43,10 +44,6 @@ class Tower(x: Double, y: Double):
 
   def targetAndShoot() =
     decideTarget()
-    //if target.isDefined then shoot()
-    //else stopTimer()
-
-
     target match
       case Some(foundTarget) =>
         if isInRange(foundTarget.coords) && foundTarget.hp > 0 then
@@ -55,10 +52,12 @@ class Tower(x: Double, y: Double):
         else stopTimer()
       case _ =>
 
+  // Stop shooting timer when no targets are found.
   def stopTimer() =
     fireTimer.foreach(_.cancel())
     fireTimer = None
 
+  // Shoot a projectile object at enemy.
   def shoot(foundTarget: Enemy) =
     fireTimer = Some(new Timer)
     fireTimer.get.scheduleAtFixedRate( new TimerTask{
@@ -68,22 +67,25 @@ class Tower(x: Double, y: Double):
       else stopTimer()
     },0,fireRate)
 
-  // Only when tower is aquired. Follows mouse.
-  //def move() =
-  //  Main.stage.scene.onMouseMoved = (event: MouseEvent) => {
-  //    coords.x = event.x
-  //    coords.y = event.y
-  //  }
+  def isInsideTower(xPos: Double, yPos: Double): Boolean =
+    (xPos < coords.x + side &&
+     xPos > coords.x &&
+     yPos < coords.y  + side &&
+     yPos > coords.y)
+
+  def moveTower(xPos: Double, yPos: Double) =
+    coords = Vector2D(xPos, yPos)
+    //isMoving = true
 
   def drawTowerRange(g: GraphicsContext) =
     val oldTransform = g.getTransform
-    g.translate(x, y)
+    g.translate(coords.x, coords.y)
     g.fillOval(-range, -range, range*2, range*2)
     g.setTransform(oldTransform)
 
   def drawTower(g: GraphicsContext) =
     val oldTransform = g.getTransform
-    g.translate(x, y)
+    g.translate(coords.x, coords.y)
 
     g.fillRect(-side/2, -side/2, side, side)
     g.setTransform(oldTransform)

@@ -1,5 +1,8 @@
 package scala
 
+
+// Defines 2D vector data type for speed and coordinates with some helper methods.
+// Inspired by Asteroids excercise.
 case class Vector2D(x: Double, y: Double):
 
   def length = math.sqrt(this.x*this.x+this.y*this.y)
@@ -20,18 +23,18 @@ case class Vector2D(x: Double, y: Double):
 
   def /(other: Double) = Vector2D(x / other, y / other)
 
-  def bound(xBound: Int, shapeWidth: Int, yBound: Int, shapeHeight: Int) =
-    val newX =
-      if x >= xBound + shapeWidth then x - xBound - 2 * shapeWidth
-      else if x < -shapeWidth then x + xBound + 2 * shapeWidth
-      else x
-    val newY =
-      if y >= yBound + shapeHeight then y - yBound - 2 * shapeHeight
-      else if y < -shapeHeight then y + yBound + 2 * shapeHeight
-      else y
+  //def bound(xBound: Int, shapeWidth: Int, yBound: Int, shapeHeight: Int) =
+  //  val newX =
+  //    if x >= xBound + shapeWidth then x - xBound - 2 * shapeWidth
+  //    else if x < -shapeWidth then x + xBound + 2 * shapeWidth
+  //    else x
+  //  val newY =
+  //    if y >= yBound + shapeHeight then y - yBound - 2 * shapeHeight
+  //    else if y < -shapeHeight then y + yBound + 2 * shapeHeight
+  //    else y
 
-    if newX != x || newY != y then Vector2D(newX, newY)
-    else this
+  //  if newX != x || newY != y then Vector2D(newX, newY)
+  //  else this
 
 end Vector2D
 

@@ -1,4 +1,5 @@
-//package scala
+// Unused for now.
+
 package game
 
 // import scalafx.scene.paint.*

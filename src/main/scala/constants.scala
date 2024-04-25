@@ -1,7 +1,6 @@
-//package scala
 package game
 
-import scala.util.*
+// This file is for global constants. 
 
 // World settings
 val worldWidth      = 1500
@@ -25,4 +24,3 @@ val sizeOfKnight    = 5
 
 
 // Random generation
-//val randColor = Random(100).between(200,250)

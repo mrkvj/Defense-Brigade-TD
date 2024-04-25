@@ -1,25 +1,34 @@
 //package scala
 package game
 
+import game.Main.timer
 import scalafx.animation.AnimationTimer
 import scalafx.application.JFXApp3
 import scalafx.scene.Scene
 import scalafx.scene.canvas.Canvas
 import scalafx.scene.layout.Pane
 import scalafx.scene.paint.Color
-import scalafx.scene.shape._
+import scalafx.scene.shape.*
 import scalafx.scene.media.{Media, MediaPlayer}
+
 import java.io.File
 import scalafx.scene.text.Text
 import scalafx.scene.text.Font
 import scalafx.scene.control.Button
 import scalafx.scene.layout.VBox
 import scalafx.Includes.eventClosureWrapperWithZeroParam
+import scalafx.scene.input.MouseEvent
+import scalafx.Includes._
+import scalafx.animation.Timeline
+import scalafx.util.Duration
 
+
+// Main function. Game is run from here.
 object Main extends JFXApp3:
 
   var game = Game
   var timer: AnimationTimer = _
+
   def start() =
     stage = new JFXApp3.PrimaryStage:
       title = "Defense Brigade TD"
@@ -31,50 +40,178 @@ object Main extends JFXApp3:
     val textFields = new Text
 
     // Audio
-    val audioPath = "/Users/veikkomarkkula/Code/DefenceBrigadeTD/src/main/scala/Tavern Idea.mp3"
+    val audioPath = "src/main/music/Tavern Idea.mp3"
     val file = new File(audioPath)
     val media = new Media(file.toURI.toString)
     val mediaPlayer = new MediaPlayer(media)
-    mediaPlayer.setOnEndOfMedia(() => mediaPlayer.seek(mediaPlayer.getStartTime()))
-    //mediaPlayer.play()
+    mediaPlayer.setOnEndOfMedia(() => mediaPlayer.seek(mediaPlayer.getStartTime))
 
-    // Text
-    val gameInfo = new Text {
-      text = "InitGameInfo"
-      fill = Color.Black
-      font = Font("Courier New", 24)
-      layoutX = 50
-      layoutY = 50
+    // Tower movement, placement and mouse control.
+    //var chosenTower: Option[Tower] = None
+    var isMovingTower = false
+    arena.onMousePressed = (event: MouseEvent) => {
+      if isMovingTower then
+        Game.chosenTower.foreach(tower =>
+          tower.isMoving = false
+          Game.towers += tower
+          Game.chosenTower = None)
+        isMovingTower = false
     }
-    val highScores = new Text {
-      text = readHighScoresFromCSV()
-      fill = Color.Black
-      font = Font("Courier New", 24)
-      layoutX = 1300
-      layoutY = 50
+    arena.onMouseMoved = (event: MouseEvent) => {
+      if isMovingTower then
+        Game.chosenTower.foreach { tower =>
+          tower.moveTower(event.x, event.y)
+          println(s"xcoord: ${event.x}, ycoord: ${event.y}")
+        }
     }
-    val gameOver = new Text {
-      text = Game.gameOverScreen()
-      fill = Color.Black
-      font = Font("Courier New", 100)
-      layoutX = 500
-      layoutY = 500
+
+    // General Buttons
+    val startGameButton = new Button("Start Game") {
+      layoutX = 100
+      layoutY = 100
     }
-    // Button
-    val button = new Button("Restart") {
-      layoutX = 50
+    val endGameButton = new Button("End Game") {
+      layoutX = 100
       layoutY = 900
-      onAction = () => {
-        Game.restartGame()
-        root.children -= gameOver
-        root.children.clear()
-        root.children += arena
-        root.children += gameInfo
-        root.children += highScores
-        timer.start()
-        mediaPlayer.play()
-      }
     }
+    val restartButton = new Button("Restart") {
+      layoutX = 100
+      layoutY = 100
+    }
+    val mainMenuButton = new Button("Main Menu") {
+      layoutX = 100
+      layoutY = 150
+    }
+    // Tower Buttons
+    val buyBowButton = new Button(s"Bow: ${Game.towerPrices("Bow")}G") {
+      layoutX = worldWidth - 200
+      layoutY = 100
+    }
+    val buyMarksmanButton = new Button(s"Marksman: ${Game.towerPrices("Marksman")}G") {
+      layoutX = worldWidth - 200
+      layoutY = 150
+    }
+    val buyAutoCrossbowButton = new Button(s"Auto Crossbow: ${Game.towerPrices("Auto Crossbow")}G") {
+      layoutX = worldWidth - 200
+      layoutY = 200
+    }
+
+    // Theese need to be after buttons but before actions.
+    // Triggers game over.
+    def gameOver() =
+      timer.stop()
+      writeScoreToCSV(Game.player.score)
+      mediaPlayer.stop()
+      g.fill = Color.web("#80000040")
+      g.fillRect(0, 0, worldWidth, worldHeight)
+      root.children.clear()
+      root.children += arena
+      root.children += gameOverText
+      root.children += restartButton
+      root.children += highScoresText
+      root.children += mainMenuButton
+    // Triggers main menu.
+    def mainMenu() =
+      // General stuff
+      timer.stop()
+      writeScoreToCSV(Game.player.score)
+      mediaPlayer.stop()
+      g.fill = Color.web("#808080")
+      g.fillRect(0, 0, worldWidth, worldHeight)
+      root.children.clear()
+      root.children += arena
+      // Text
+      root.children += mainMenuText
+      root.children += highScoresText
+      // Buttons
+      root.children += startGameButton
+      // TODO: Add help button and settings button
+      //root.children += helpButton
+      //root.children += settingsButton
+
+    // TODO: Fix this. Works only on the first time.
+    // 3 second timer for insufficient gold message.
+    def notEnoughGold() =
+      root.children += notEnoughGoldText
+      val timeline = new Timeline {
+        keyFrames = Seq(
+          at(Duration(0)) {
+            notEnoughGoldText.opacity -> 1.0
+          },
+          at(Duration(3000)) {
+            notEnoughGoldText.opacity -> 0.0
+          }
+        )
+        onFinished = () => stop()
+      }
+      timeline.play()
+
+    // Actions
+    val startGameAction = () => {
+      // General stuff
+      timer.start()
+      mediaPlayer.play()
+      Game.restartGame()
+      root.children.clear()
+      root.children += arena
+      // Text
+      //root.children -= gameOverText
+      //root.children -= highScoresText
+      root.children += gameInfoText
+      root.children += purchaseTowersText
+      // Buttons
+      root.children += endGameButton
+      root.children += buyBowButton
+      root.children += buyMarksmanButton
+      root.children += buyAutoCrossbowButton
+    }
+    val gameOverAction = () => {
+      gameOver()
+    }
+    val mainMenuAction = () => {
+      mainMenu()
+    }
+    // Buy towers.
+    val buyBowAction = () => {
+      val goldAfterPurchase = Game.player.gold - Game.towerPrices("Bow")
+      if goldAfterPurchase >= 0 then
+        isMovingTower = true
+        Game.chosenTower = Some(new Bow(0, 0))
+        Game.chosenTower.foreach(_.isMoving = true)
+        Game.player.gold = goldAfterPurchase
+      else
+        notEnoughGold()
+    }
+    val buyMarksmanAction = () => {
+      val goldAfterPurchase = Game.player.gold - Game.towerPrices("Marksman")
+      if goldAfterPurchase >= 0 then
+        isMovingTower = true
+        Game.chosenTower = Some(new Marksman(0, 0))
+        Game.chosenTower.foreach(_.isMoving = true)
+        Game.player.gold = goldAfterPurchase
+      else
+        notEnoughGold()
+    }
+    val buyAutoCrossbowAction = () => {
+      val goldAfterPurchase = Game.player.gold - Game.towerPrices("Auto Crossbow")
+      if goldAfterPurchase >= 0 then
+        isMovingTower = true
+        Game.chosenTower = Some(new AutoCrossbow(0, 0))
+        Game.chosenTower.foreach(_.isMoving = true)
+        Game.player.gold = goldAfterPurchase
+      else
+        notEnoughGold()
+    }
+
+    // Buttons
+    startGameButton.onAction = startGameAction
+    restartButton.onAction = startGameAction
+    endGameButton.onAction = gameOverAction
+    mainMenuButton.onAction = mainMenuAction
+    //Towers
+    buyBowButton.onAction = buyBowAction
+    buyMarksmanButton.onAction = buyMarksmanAction
+    buyAutoCrossbowButton.onAction = buyAutoCrossbowAction
 
     def paint() =
       // Clear
@@ -93,42 +230,28 @@ object Main extends JFXApp3:
 
     // Update drawn game objects.
     def repaint(): Unit =
-      if !Game.player.lost then
-        Game.step()
-        //Game.drawText()
-        paint()
-        gameInfo.text = Game.getGameInfo()
-      // else if game not started then Game.mainMenu()
-      else
-        //g.clearRect(0, 0, worldWidth, worldHeight)
-        timer.stop()
-        writeScoreToCSV(Game.player.score)
-        mediaPlayer.stop()
-        g.fill = Color.web("#80000040")
-        g.fillRect(0, 0, worldWidth, worldHeight)
-        root.children.clear()
-        root.children += arena
-        root.children += gameOver
-        root.children += button
+      Game.gameScreen match
+        case "game" =>
+          Game.step()
+          paint()
+          gameInfoText.text = Game.getGameInfo()
+        case "main_menu" =>
+          mainMenu()
+        case "game_over" =>
+          gameOver()
+        case _ => throw new NonexistingGameScreenException("Impossible game screen reached. Check screen state logic. ")
 
+    // Default Initializers
+    root.children += arena
+    //root.children += restartButton
+    //root.children += highScoresText
 
-    end repaint
-
-    // Timer
+    // Game animation timer
     timer = AnimationTimer(_ => repaint())
     if Game.player.lost then timer.stop()
     timer.start()
 
-
-    if Game.player.lost then
-      root.children += arena
-      root.children += gameOver
-      root.children += button
-    else
-      root.children += arena
-      root.children += gameInfo
-      root.children += highScores
-
+    // Scene
     val scene = new Scene(parent = root)
     stage.scene = scene
 
