@@ -107,9 +107,9 @@ object Game:
   // Draw current state of all game objects at their current locations.
   def draw(g: GraphicsContext) =
     // TODO: Add option to show enemy goals.
-    //goals.foreach(goal =>
-    //  g.fill = goal.color
-    //  goal.draw(g))
+    goals.foreach(goal =>
+      g.fill = goal.color
+      goal.draw(g))
     enemies.foreach(enemy =>
       g.fill = enemy.color
       enemy.draw(g))
